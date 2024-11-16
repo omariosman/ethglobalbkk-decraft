@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -8,7 +7,7 @@ export default function Component() {
     const router = useRouter();
     const { craft } = router.query;
   
-    const selectedCraft = craft ? JSON.parse(craft) : null;
+    const selectedCraft = craft ? JSON.parse(craft as any) : null;
   
     const handleDailyStoryClick = () => {
         router.push('/lets_go'); // Navigate to "lets_go" page

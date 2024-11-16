@@ -1,4 +1,3 @@
-// @ts-nocheck
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
@@ -37,7 +36,7 @@ export default function Component() {
   }, []);
 
   // Handle the click to navigate to the story page and pass the NFT details
-  const handleNFTClick = (item) => {
+  const handleNFTClick = (item: any) => {
     // Serializing item to pass as query parameter
     router.push({
       pathname: '/story',
@@ -94,23 +93,23 @@ export default function Component() {
               }}
             />
             <div style={{ padding: '16px', color: 'white' }}>
-              <h2 style={{ fontSize: '20px', fontWeight: '600', marginBottom: '12px' }}>{item.name}</h2>
+              <h2 style={{ fontSize: '20px', fontWeight: '600', marginBottom: '12px' }}>{(item as any).name}</h2>
               <p>{(item as any).description}</p>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px' }}>
                 <div>
                   <span style={{ color: '#4a9eff' }}>Country</span>
                   <br />
-                  <span>{item.country}</span>
+                  <span>{(item as any).country}</span>
                 </div>
                 <div style={{ textAlign: 'right' }}>
                   <span style={{ color: '#4a9eff' }}>City</span>
                   <br />
-                  <span>{item.city}</span>
+                  <span>{(item as any).city}</span>
                 </div>
               </div>
               <div style={{ marginTop: '12px' }}>
                 <p>
-                  <strong>Raised Amount:</strong> {item.raisedAmount}
+                  <strong>Raised Amount:</strong> {(item as any).raisedAmount}
                 </p>
               </div>
             </div>

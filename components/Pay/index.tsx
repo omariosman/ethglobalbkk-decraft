@@ -1,4 +1,3 @@
-// @ts-nocheck
 
 "use client";
 import {
@@ -68,9 +67,5 @@ export const handlePay = async (address: string, amount: any) => {
 };
 
 export const PayBlock = () => {
-  return (
-    <button className="bg-blue-500 p-4" onClick={handlePay}>
-      Pay
-    </button>
-  );
+  return <></>
 };

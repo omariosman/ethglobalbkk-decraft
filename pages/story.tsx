@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
@@ -7,7 +6,7 @@ import { handlePay } from '../components/Pay/index';
 export default function StoryPage() {
   const router = useRouter();
   const { nftData } = router.query;
-  const parsedData = nftData ? JSON.parse(nftData) : {};
+  const parsedData = nftData ? JSON.parse(nftData as any) : {};
   const { creator, name, description, image, country, city, raisedAmount, likes, craftStory } = parsedData;
   
   const [ethAmount, setEthAmount] = useState(0);
