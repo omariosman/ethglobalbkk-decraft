@@ -1,7 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/router';
 
 export default function Component() {
+  const router = useRouter();
   return (
     <div style={{
       display: 'flex',
@@ -26,7 +28,8 @@ export default function Component() {
           gap: '8px',
           fontSize: '18px',
           cursor: 'pointer'
-        }}>
+        }}
+        onClick={() => router.push('/home')}>
           ← Back
         </button>
       </div>

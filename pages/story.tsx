@@ -43,7 +43,7 @@ export default function StoryPage() {
           gap: '8px',
           fontSize: '18px',
           cursor: 'pointer'
-        }} onClick={() => router.back()}>
+        }} onClick={() => router.push('/home')}>
           ← Back
         </button>
       </div>

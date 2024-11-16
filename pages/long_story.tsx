@@ -37,13 +37,24 @@ export default function Component() {
         alignItems: 'center',
         marginBottom: '32px'
       }}>
-        <Link href="#" style={{
-          color: '#1677ff',
-          textDecoration: 'none',
-          fontSize: '18px'
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          marginBottom: '20px',
         }}>
-          ← Back
-        </Link>
+          <button
+            onClick={() => router.push('/home')}
+            style={{
+              color: '#1677ff',
+              background: 'none',
+              border: 'none',
+              fontSize: '18px',
+              cursor: 'pointer',
+            }}
+          >
+            ← Back
+          </button>
+        </div>
       </div>
 
       <h1 style={{

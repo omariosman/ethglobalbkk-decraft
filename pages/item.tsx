@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/router';
 
 export default function Component() {
+  const router = useRouter();
+
   const [ethAmount, setEthAmount] = useState(0.09)
 
   const increment = () => setEthAmount(prev => Number((prev + 0.01).toFixed(2)))
@@ -18,23 +21,17 @@ export default function Component() {
       padding: '20px',
       fontFamily: 'system-ui, sans-serif'
     }}>
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        marginBottom: '20px'
-      }}>
-        <button style={{
-          background: 'none',
-          border: 'none',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          fontSize: '18px',
-          cursor: 'pointer'
-        }}>
-          ← Back
-        </button>
-      </div>
+<div
+  onClick={() => router.push('/home')}
+  style={{
+    color: '#1677ff',
+    textDecoration: 'none',
+    fontSize: '18px',
+    cursor: 'pointer',
+  }}
+>
+  ← Back
+</div>
 
       <Image
         src="/images/ship.png?height=400&width=400"

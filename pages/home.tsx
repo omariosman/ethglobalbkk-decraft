@@ -157,6 +157,7 @@ export default function Component() {
             opacity: 0.5,
             cursor: 'pointer',
           }}
+          onClick={() => router.push('map')}
         >
           <Image
             src="/assets/icons/daily_story.png?height=24&width=24"

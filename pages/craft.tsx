@@ -41,6 +41,10 @@ export default function Component() {
     });
   };
 
+  const handleBackClick = () => {
+    router.push('/home'); // Redirect to /home when "Back" is clicked
+  };
+
   if (selectedCraft) {
     return (
       <div style={{
@@ -58,13 +62,18 @@ export default function Component() {
           alignItems: 'center',
           marginBottom: '20px',
         }}>
-          <Link href="#" style={{
-            color: '#1677ff',
-            textDecoration: 'none',
-            fontSize: '18px',
-          }}>
+          <button
+            onClick={handleBackClick}
+            style={{
+              color: '#1677ff',
+              background: 'none',
+              border: 'none',
+              fontSize: '18px',
+              cursor: 'pointer',
+            }}
+          >
             ← Back
-          </Link>
+          </button>
         </div>
         <div style={{
           flex: 1,

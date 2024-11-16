@@ -58,13 +58,17 @@ export default function Component() {
         alignItems: 'center',
         marginBottom: '20px'
       }}>
-        <Link href="#" style={{
-          color: '#1677ff',
-          textDecoration: 'none',
-          fontSize: '18px'
-        }}>
-          ← Back
-        </Link>
+<div
+  onClick={() => router.push('/home')}
+  style={{
+    color: '#1677ff',
+    textDecoration: 'none',
+    fontSize: '18px',
+    cursor: 'pointer',
+  }}
+>
+  ← Back
+</div>
       </div>
 
       <div style={{
