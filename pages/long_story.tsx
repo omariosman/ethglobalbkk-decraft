@@ -44,7 +44,7 @@ export default function Component() {
         marginBottom: '32px',
         lineHeight: '1.2'
       }}>
-        {selectedCraft.name}
+        {selectedCraft.name || "Thai Long-Tail Fishing Boat Building"}
       </h1>
 
       <div style={{
