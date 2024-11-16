@@ -1,6 +1,5 @@
 import { SignIn } from "@/components/SignIn";
 import WelcomeComponent from "@/components/Welcome";
-import Component from "@/components/Donate";
 
 export default function Home() {
   return (
