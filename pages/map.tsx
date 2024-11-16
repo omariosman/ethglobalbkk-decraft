@@ -1,25 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import Image from 'next/image'
-import Link from 'next/link'
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
-const crafts = 
-[
+const crafts = [
   {
+    name: "Thai Long-Tail Fishing Boat Building!",
     map_spot: 0,
     imgs: ["craft_img1.png", "craft_img2.png", "craft_img3.png", "craft_img4.png"],
     country: "Thailand",
     city: "Ban Khlong Rua Village",
+    imagesIdx: 0
   },
   {
+    name: "English Swordsmithing",
     map_spot: 1,
     imgs: ["sword1.png", "sword2.png", "sword3.png", "sword4.png"],
     country: "United Kingdom",
     city: "London",
+    imagesIdx: 1
   }
-]
+];
 
 export default function Component() {
   const [randomIndex, setRandomIndex] = useState(0);
+  const router = useRouter();
 
   useEffect(() => {
     const randomNumber = Math.floor(Math.random() * crafts.length);
@@ -27,6 +32,13 @@ export default function Component() {
   }, []);
 
   const selectedCraft = crafts[randomIndex];
+
+  const handleContinueExploring = () => {
+    router.push({
+      pathname: '/craft',
+      query: { craft: JSON.stringify(selectedCraft) }, // Pass selected craft as a query parameter
+    });
+  };
 
   return (
     <div style={{
@@ -62,7 +74,7 @@ export default function Component() {
       }}>
         <Image
           src={`/assets/map_spots/${selectedCraft.map_spot}.png?height=500&width=400`}
-          alt="Thailand map with location marker"
+          alt="Map with location marker"
           width={400}
           height={500}
           style={{
@@ -110,18 +122,21 @@ export default function Component() {
           />
         </div>
 
-        <button style={{
-          width: '100%',
-          padding: '16px',
-          backgroundColor: '#1677ff',
-          color: 'white',
-          border: 'none',
-          borderRadius: '12px',
-          fontSize: '18px',
-          fontWeight: '500',
-          cursor: 'pointer',
-          marginBottom: '32px'
-        }}>
+        <button
+          onClick={handleContinueExploring}
+          style={{
+            width: '100%',
+            padding: '16px',
+            backgroundColor: '#1677ff',
+            color: 'white',
+            border: 'none',
+            borderRadius: '12px',
+            fontSize: '18px',
+            fontWeight: '500',
+            cursor: 'pointer',
+            marginBottom: '32px'
+          }}
+        >
           <b>Continue Exploring !</b>
         </button>
       </div>
@@ -176,5 +191,5 @@ export default function Component() {
         </div>
       </div>
     </div>
-  )
+  );
 }
