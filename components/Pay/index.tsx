@@ -11,19 +11,15 @@ const sendPayment = async () => {
     const res = await fetch(`/api/initiate-payment`, {
       method: "POST",
     });
-
+    console.log(`res: ${JSON.stringify(res, null, 2)}`);
     const { id } = await res.json();
 
     console.log(id);
 
     const payload: PayCommandInput = {
       reference: id,
-      to: "0x0c892815f0B058E69987920A23FBb33c834289cf", // Test address
+      to: "0x1006dA57aD62c72d5d6F05A0f436FbE6cCB0AB77", // Test address
       tokens: [
-        {
-          symbol: Tokens.WLD,
-          token_amount: tokenToDecimals(0.5, Tokens.WLD).toString(),
-        },
         {
           symbol: Tokens.USDCE,
           token_amount: tokenToDecimals(0.1, Tokens.USDCE).toString(),
