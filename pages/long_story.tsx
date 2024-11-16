@@ -7,7 +7,16 @@ export default function Component() {
     const router = useRouter();
     const { craft } = router.query;
   
-    const selectedCraft = craft ? JSON.parse(craft as any) : null;
+    const selectedCraft = craft ? JSON.parse(craft as any) : 
+    {
+        name: "Thai Long-Tail Fishing Boat Building!",
+        map_spot: 0,
+        imgs: ["craft_img1.png", "craft_img2.png", "craft_img3.png", "craft_img4.png"],
+        country: "Thailand",
+        city: "Ban Khlong Rua Village",
+        imagesIdx: 0,
+        longStory: "Rua hua tong are traditional fishing boats only used in the Andaman Sea. Boats are matched to the seas they sail on. For example, the boat used in Pattani province is called rua ko rair, which is flatter, allowing it to sail along smaller but choppy wave crests in the lower Gulf of Thailand. Rua hua tong have different features — a spherical shape in front, and a rising prow, unique features that can withstand huge strong tidal waves in the Andaman Sea.\n\nBan Khlong Rua's boats are famous for quality, endurance and beauty. It is not only fishermen that come to the village for boats. Hotels and the tourism industry on the Andaman Sea order boatbuilders to make larger vessels with special features to carry tourists for sightseeing. Supad, known among locals as Bung Reen, has been commissioned to make boats with fancy details, such as the prow being in Nordic Viking-style, or large tourist boats that can accommodate up to 100 people.\n\nThe rua hua tong have become a symbol for the tourism industry in Krabi, and often appear in promotional pictures, thanks to the photogenic nature of the boat. Since 2013, Krabi has promoted the annual fishermen's worship of rua hua tong as a tourism event. Satun province runs the annual Rua Hua Tong Fishing Event to encourage tourism."
+      };
   
     const handleDailyStoryClick = () => {
         router.push('/lets_go'); // Navigate to "lets_go" page
@@ -43,7 +52,7 @@ export default function Component() {
         marginBottom: '32px',
         lineHeight: '1.2'
       }}>
-        {selectedCraft.name || "Thai Long-Tail Fishing Boat Building"}
+        {selectedCraft.name}
       </h1>
 
       <div style={{
