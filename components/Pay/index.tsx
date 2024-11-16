@@ -6,7 +6,7 @@ import {
   PayCommandInput,
 } from "@worldcoin/minikit-js";
 
-const sendPayment = async () => {
+const sendPayment = async (address: string, amount: any) => {
   try {
     const res = await fetch(`/api/initiate-payment`, {
       method: "POST",
@@ -18,11 +18,11 @@ const sendPayment = async () => {
 
     const payload: PayCommandInput = {
       reference: id,
-      to: "0x1006dA57aD62c72d5d6F05A0f436FbE6cCB0AB77", // Test address
+      to: address,
       tokens: [
         {
           symbol: Tokens.USDCE,
-          token_amount: tokenToDecimals(0.1, Tokens.USDCE).toString(),
+          token_amount: tokenToDecimals(amount, Tokens.USDCE).toString(),
         },
       ],
       description: "Watch this is a test",
@@ -37,12 +37,12 @@ const sendPayment = async () => {
   }
 };
 
-const handlePay = async () => {
+export const handlePay = async (address: string, amount: any) => {
   if (!MiniKit.isInstalled()) {
     console.error("MiniKit is not installed");
     return;
   }
-  const sendPaymentResponse = await sendPayment();
+  const sendPaymentResponse = await sendPayment(address, amount);
   const response = sendPaymentResponse?.finalPayload;
   if (!response) {
     return;

@@ -34,8 +34,13 @@ export default function Component() {
     fetchData();
   }, []);
 
-  const handleDailyStoryClick = () => {
-    router.push('/lets_go'); // Navigate to "lets_go" page
+  // Handle the click to navigate to the story page and pass the NFT details
+  const handleNFTClick = (item) => {
+    // Serializing item to pass as query parameter
+    router.push({
+      pathname: '/story',
+      query: { nftData: JSON.stringify(item) }
+    });
   };
 
   return (
@@ -73,6 +78,7 @@ export default function Component() {
               overflow: 'hidden',
               backgroundColor: '#1a2634',
             }}
+            onClick={() => handleNFTClick(item)} // Handle click to navigate
           >
             <Image
               src={item.image}
@@ -150,7 +156,6 @@ export default function Component() {
             opacity: 0.5,
             cursor: 'pointer',
           }}
-          onClick={handleDailyStoryClick} // Attach the click handler
         >
           <Image
             src="/assets/icons/daily_story.png?height=24&width=24"
