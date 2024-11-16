@@ -167,7 +167,7 @@ export default function Component() {
             Today&apos;s Craft is <span style={{ fontWeight: '600' }}>Thai Long-Tail Fishing Boat Building</span>!
           </p>
           <Image
-            src="/assets/avatars/avatar4.png?height=32&width=32"
+            src="/assets/avatars/avatar3.png?height=32&width=32"
             alt="Craftsman avatar"
             width={32}
             height={32}
@@ -204,7 +204,7 @@ export default function Component() {
           opacity: 0.5
         }}>
           <Image
-            src="/assets/avatars/avatar4.png?height=24&width=24"
+            src="/assets/avatars/avatar3.png?height=24&width=24"
             alt="Explore icon"
             width={24}
             height={24}

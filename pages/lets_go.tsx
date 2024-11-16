@@ -1,7 +1,18 @@
 import React from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/router';
 
 export default function Component() {
+  const router = useRouter(); // Initialize useRouter
+
+  const handleExploreClick = () => {
+    router.push('/home');
+  };
+
+  const handleLetsGoClick = () => {
+    router.push('/map');
+  };
+
   return (
     <div style={{
       display: 'flex',
@@ -41,7 +52,7 @@ export default function Component() {
         marginBottom: '40px'
       }}>
         <Image
-          src="/assets/avatars/avatar3.png?height=200&width=200"
+          src="/assets/avatars/avatar0.png?height=200&width=200"
           alt="Pixel art heart character"
           width={200}
           height={200}
@@ -59,16 +70,6 @@ export default function Component() {
           Are you excited to learn about today&apos;s new craft?
         </h1>
 
-        <p style={{
-          fontSize: '18px',
-          color: '#666',
-          textAlign: 'center',
-          maxWidth: '320px',
-          lineHeight: '1.5'
-        }}>
-          Your Donation will Help his Craft Thrive for More Generations to Come :)
-        </p>
-
         <button style={{
           width: '100%',
           padding: '16px',
@@ -80,8 +81,11 @@ export default function Component() {
           fontWeight: '500',
           cursor: 'pointer',
           marginTop: '24px'
-        }}>
-        <b>Continue Exploring !</b>
+        }}
+        onClick={handleLetsGoClick}
+        >
+        
+        <b>Let&apos;s Go !</b>
         </button>
       </div>
 
@@ -97,12 +101,24 @@ export default function Component() {
           alignItems: 'center',
           gap: '4px'
         }}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '4px',
+            opacity: 0.5,
+            cursor: 'pointer',
+          }}
+        >
           <Image
             src="/assets/icons/explore.png?height=24&width=24"
             alt="Explore icon"
             width={24}
             height={24}
           />
+          
+          </div>
           <span style={{
             fontSize: '14px',
             color: '#1677ff',

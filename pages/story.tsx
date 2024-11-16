@@ -101,7 +101,7 @@ export default function Component() {
         marginBottom: '32px'
       }}>
         <Image
-          src="/assets/avatars/avatar1.png?height=30&width=30"
+          src="/assets/avatars/avatar0.png?height=30&width=30"
           alt="Chai's profile"
           width={48}
           height={48}

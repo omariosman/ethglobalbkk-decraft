@@ -1,8 +1,33 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image'
 import Link from 'next/link'
 
+const crafts = 
+[
+  {
+    map_spot: 0,
+    imgs: ["craft_img1.png", "craft_img2.png", "craft_img3.png", "craft_img4.png"],
+    country: "Thailand",
+    city: "Ban Khlong Rua Village",
+  },
+  {
+    map_spot: 1,
+    imgs: ["sword1.png", "sword2.png", "sword3.png", "sword4.png"],
+    country: "United Kingdom",
+    city: "London",
+  }
+]
+
 export default function Component() {
+  const [randomIndex, setRandomIndex] = useState(0);
+
+  useEffect(() => {
+    const randomNumber = Math.floor(Math.random() * crafts.length);
+    setRandomIndex(randomNumber);
+  }, []);
+
+  const selectedCraft = crafts[randomIndex];
+
   return (
     <div style={{
       display: 'flex',
@@ -36,7 +61,7 @@ export default function Component() {
         gap: '24px'
       }}>
         <Image
-          src="/assets/imgs/spot_map.png?height=500&width=400"
+          src={`/assets/map_spots/${selectedCraft.map_spot}.png?height=500&width=400`}
           alt="Thailand map with location marker"
           width={400}
           height={500}
@@ -56,11 +81,11 @@ export default function Component() {
         }}>
           <div>
             <div style={{ color: '#1677ff', marginBottom: '4px' }}>Country</div>
-            <div style={{ fontSize: '16px', fontWeight: '500' }}>Thailand</div>
+            <div style={{ fontSize: '16px', fontWeight: '500' }}>{selectedCraft.country}</div>
           </div>
           <div style={{ textAlign: 'right' }}>
             <div style={{ color: '#1677ff', marginBottom: '4px' }}>City</div>
-            <div style={{ fontSize: '16px', fontWeight: '500' }}>Ban Khlong Rua Village</div>
+            <div style={{ fontSize: '16px', fontWeight: '500' }}>{selectedCraft.city}</div>
           </div>
         </div>
 
@@ -75,10 +100,10 @@ export default function Component() {
           marginBottom: '24px'
         }}>
           <p style={{ fontSize: '16px', margin: 0 }}>
-            Hello Explorer! Today&apos;s Craft is in <span style={{ fontWeight: '600' }}>Thailand</span>!
+            Hello Explorer! Today&apos;s Craft is in <span style={{ fontWeight: '600' }}>{selectedCraft.country}</span>!
           </p>
           <Image
-            src="/assets/icons/explore.png?height=32&width=32"
+            src={`/assets/avatars/avatar${randomIndex}.png?height=32&width=32`}
             alt="Explorer avatar"
             width={32}
             height={32}
