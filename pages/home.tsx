@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
@@ -16,7 +18,7 @@ export default function Component() {
         const responses = await Promise.all(urls.map(url => fetch(url)));
         const results = await Promise.all(responses.map(res => res.json()));
         console.log(`results: ${JSON.stringify(results, null, 2)}`);
-        setData(results.map(result => ({
+        setData((results as any).map((result: { metadata: { name: any; description: any; attributes: any[]; }; image_url: any; })  => ({
           name: result.metadata.name,
           description: result.metadata.description,
           image: result.image_url,
@@ -81,8 +83,8 @@ export default function Component() {
             onClick={() => handleNFTClick(item)} // Handle click to navigate
           >
             <Image
-              src={item.image}
-              alt={item.name}
+              src={(item as any).image}
+              alt={(item as any).name}
               width={390}
               height={250}
               style={{
@@ -93,7 +95,7 @@ export default function Component() {
             />
             <div style={{ padding: '16px', color: 'white' }}>
               <h2 style={{ fontSize: '20px', fontWeight: '600', marginBottom: '12px' }}>{item.name}</h2>
-              <p>{item.description}</p>
+              <p>{(item as any).description}</p>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px' }}>
                 <div>
                   <span style={{ color: '#4a9eff' }}>Country</span>

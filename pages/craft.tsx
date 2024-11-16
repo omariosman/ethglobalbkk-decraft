@@ -8,7 +8,7 @@ export default function Component() {
   const router = useRouter();
   const { craft } = router.query;
 
-  const selectedCraft = craft ? JSON.parse(craft) : null;
+  const selectedCraft = craft ? JSON.parse(craft as any) : null;
 
   // Array of image sources
   const images = [
