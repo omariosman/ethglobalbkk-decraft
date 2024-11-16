@@ -1,175 +1,127 @@
-import Image from 'next/image'
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 export default function Component() {
+  const [data, setData] = useState([]);
+  const router = useRouter(); // Initialize useRouter
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const urls = [
+        'https://worldchain-sepolia.explorer.alchemy.com/api/v2/tokens/0xEA9005764CF22392501B1b19B1451cdD64a2cba6/instances/0',
+        'https://worldchain-sepolia.explorer.alchemy.com/api/v2/tokens/0xEA9005764CF22392501B1b19B1451cdD64a2cba6/instances/1'
+      ];
+      try {
+        const responses = await Promise.all(urls.map(url => fetch(url)));
+        const results = await Promise.all(responses.map(res => res.json()));
+        console.log(`results: ${JSON.stringify(results, null, 2)}`);
+        setData(results.map(result => ({
+          name: result.metadata.name,
+          description: result.metadata.description,
+          image: result.image_url,
+          country: result.metadata.attributes.find(attr => attr.trait_type === 'Country')?.value,
+          city: result.metadata.attributes.find(attr => attr.trait_type === 'City')?.value,
+          raisedAmount: result.metadata.attributes.find(attr => attr.trait_type === 'Raised Amount')?.value,
+          likes: result.metadata.attributes.find(attr => attr.trait_type === 'Number of likes')?.value,
+          craftStory: result.metadata.attributes.find(attr => attr.trait_type === 'Craft Story')?.value,
+        })));
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleDailyStoryClick = () => {
+    router.push('/lets_go'); // Navigate to "lets_go" page
+  };
+
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      padding: '20px',
-      backgroundColor: '#fdf6ec',
-      minHeight: '100vh',
-      maxWidth: '430px',
-      margin: '0 auto'
-    }}>
-      <h1 style={{
-        fontSize: '24px',
-        fontWeight: '600',
-        textAlign: 'left',
-        width: '100%',
-        marginBottom: '20px',
-        paddingRight: '20px'
-      }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: '20px',
+        backgroundColor: '#fdf6ec',
+        minHeight: '100vh',
+        maxWidth: '430px',
+        margin: '0 auto',
+      }}
+    >
+      <h1
+        style={{
+          fontSize: '24px',
+          fontWeight: '600',
+          textAlign: 'left',
+          width: '100%',
+          marginBottom: '20px',
+          paddingRight: '20px',
+        }}
+      >
         Explore Endangered Crafts all over the Globe & Support Fellow Humans ❤️
       </h1>
 
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '16px',
-        width: '100%'
-      }}>
-        {/* First Card */}
-        <div style={{
-          borderRadius: '12px',
-          overflow: 'hidden',
-          backgroundColor: '#1a2634'
-        }}>
-          <Image
-            src="/images/ship.png?height=250&width=390"
-            alt="Long-Tail Fishing Boat"
-            width={390}
-            height={250}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '100%' }}>
+        {data.map((item, index) => (
+          <div
+            key={index}
             style={{
-              width: '100%',
-              height: 'auto',
-              objectFit: 'cover'
+              borderRadius: '12px',
+              overflow: 'hidden',
+              backgroundColor: '#1a2634',
             }}
-          />
-          <div style={{
-            padding: '16px',
-            color: 'white'
-          }}>
-            <h2 style={{
-              fontSize: '20px',
-              fontWeight: '600',
-              marginBottom: '12px'
-            }}>Long-Tail Fishing Boat</h2>
-            
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              marginBottom: '12px'
-            }}>
-              <Image
-                src="/assets/avatars/avatar1.png?height=30&width=30"
-                alt="Chai's profile"
-                width={32}
-                height={32}
-                style={{
-                  borderRadius: '50%',
-                  marginRight: '8px'
-                }}
-              />
-              <span style={{ fontSize: '16px' }}>Chai</span>
-            </div>
-
-            <div style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              fontSize: '14px'
-            }}>
-              <div>
-                <span style={{ color: '#4a9eff' }}>Country</span>
-                <br />
-                <span>Thailand</span>
+          >
+            <Image
+              src={item.image}
+              alt={item.name}
+              width={390}
+              height={250}
+              style={{
+                width: '100%',
+                height: 'auto',
+                objectFit: 'cover',
+              }}
+            />
+            <div style={{ padding: '16px', color: 'white' }}>
+              <h2 style={{ fontSize: '20px', fontWeight: '600', marginBottom: '12px' }}>{item.name}</h2>
+              <p>{item.description}</p>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px' }}>
+                <div>
+                  <span style={{ color: '#4a9eff' }}>Country</span>
+                  <br />
+                  <span>{item.country}</span>
+                </div>
+                <div style={{ textAlign: 'right' }}>
+                  <span style={{ color: '#4a9eff' }}>City</span>
+                  <br />
+                  <span>{item.city}</span>
+                </div>
               </div>
-              <div style={{ textAlign: 'right' }}>
-                <span style={{ color: '#4a9eff' }}>City</span>
-                <br />
-                <span>Ban Khlong Hua</span>
+              <div style={{ marginTop: '12px' }}>
+                <p>
+                  <strong>Raised Amount:</strong> {item.raisedAmount}
+                </p>
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Second Card */}
-        <div style={{
-          borderRadius: '12px',
-          overflow: 'hidden',
-          backgroundColor: '#1a2634'
-        }}>
-          <Image
-            src="/images/ship.png?height=250&width=390"
-            alt="Damar Kurung: Indonesian Lanterns"
-            width={390}
-            height={250}
-            style={{
-              width: '100%',
-              height: 'auto',
-              objectFit: 'cover'
-            }}
-          />
-          <div style={{
-            padding: '16px',
-            color: 'white'
-          }}>
-            <h2 style={{
-              fontSize: '20px',
-              fontWeight: '600',
-              marginBottom: '12px'
-            }}>Damar Kurung: Indonesian Lanterns</h2>
-            
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              marginBottom: '12px'
-            }}>
-              <Image
-                src="/assets/avatars/avatar2.png?height=30&width=30"
-                alt="Jasmine's profile"
-                width={32}
-                height={32}
-                style={{
-                  borderRadius: '50%',
-                  marginRight: '8px'
-                }}
-              />
-              <span style={{ fontSize: '16px' }}>Jasmine</span>
-            </div>
-
-            <div style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              fontSize: '14px'
-            }}>
-              <div>
-                <span style={{ color: '#4a9eff' }}>Country</span>
-                <br />
-                <span>Indonesia</span>
-              </div>
-              <div style={{ textAlign: 'right' }}>
-                <span style={{ color: '#4a9eff' }}>City</span>
-                <br />
-                <span>Gresik</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
 
       <div style={{
         display: 'flex',
-        justifyContent: 'center',
-        gap: '32px',
-        marginTop: '24px',
-        width: '100%'
+        justifyContent: 'space-around',
+        borderTop: '1px solid #ddd',
+        paddingTop: '16px'
       }}>
         <div style={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: '4px'
+          gap: '4px',
+          marginRight: "10px"
         }}>
           <Image
             src="/assets/icons/explore.png?height=24&width=24"
@@ -179,23 +131,27 @@ export default function Component() {
           />
           <span style={{
             fontSize: '14px',
-            color: '#000',
+            color: '#1677ff',
             fontWeight: '500'
           }}>Explore</span>
           <div style={{
             width: '32px',
-            height: '4px',
-            backgroundColor: '#000',
+            height: '2px',
+            backgroundColor: '#1677ff',
             borderRadius: '2px'
           }} />
         </div>
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '4px',
-          opacity: 0.5
-        }}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '4px',
+            opacity: 0.5,
+            cursor: 'pointer',
+          }}
+          onClick={handleDailyStoryClick} // Attach the click handler
+        >
           <Image
             src="/assets/icons/daily_story.png?height=24&width=24"
             alt="Daily Story icon"
@@ -204,11 +160,11 @@ export default function Component() {
           />
           <span style={{
             fontSize: '14px',
-            color: '#000',
             fontWeight: '500'
           }}>Daily Story</span>
         </div>
       </div>
+
     </div>
-  )
+  );
 }
