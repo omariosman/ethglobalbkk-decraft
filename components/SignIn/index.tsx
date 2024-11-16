@@ -1,9 +1,14 @@
 "use client";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export const SignIn = () => {
+  const router = useRouter();
+
   const { data: session } = useSession();
   if (session) {
+    router.push("/home");
+
     return (
       <>
         Signed in as {session?.user?.name?.slice(0, 10)} <br />
