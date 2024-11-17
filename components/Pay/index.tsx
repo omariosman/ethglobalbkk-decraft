@@ -19,11 +19,11 @@ const sendPayment = async (address: string, amount: any) => {
 
     const payload: PayCommandInput = {
       reference: id,
-      to: "0xd175C97ed5fc71EcA4DD70Df7aC799eF808a6942",
+      to: address,
       tokens: [
         {
           symbol: Tokens.USDCE,
-          token_amount: tokenToDecimals(0.1, Tokens.USDCE).toString(),
+          token_amount: tokenToDecimals(amount, Tokens.USDCE).toString(),
         },
       ],
       description: "Donate to a craft",
@@ -68,11 +68,7 @@ export const handlePay = async (address: string, amount: any) => {
 
 export const PayBlock = () => {
   return (
-    <button 
-      className="bg-blue-500 p-4" 
-      onClick={() => handlePay("", "")}>
-      Pay
-    </button>
+  <></>
   );
   
 };
