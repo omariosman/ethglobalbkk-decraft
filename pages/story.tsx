@@ -185,7 +185,7 @@ export default function StoryPage() {
       }}
       onClick={async() => await handleDonate(creator, ethAmount)}
       >
-        Donatee
+        Donate
       </button>
 
       <div style={{
