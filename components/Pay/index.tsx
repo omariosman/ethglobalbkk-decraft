@@ -26,7 +26,7 @@ const sendPayment = async (address: string, amount: any) => {
           token_amount: tokenToDecimals(0.1, Tokens.USDCE).toString(),
         },
       ],
-      description: "Watch this is a test",
+      description: "Donate to a craft",
     };
     if (MiniKit.isInstalled()) {
       return await MiniKit.commandsAsync.pay(payload);

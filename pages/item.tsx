@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router';
+import { handlePay } from '../components/Pay/index';
 
 export default function Component() {
   const router = useRouter();
@@ -9,6 +10,10 @@ export default function Component() {
 
   const increment = () => setEthAmount(prev => Number((prev + 0.01).toFixed(2)))
   const decrement = () => setEthAmount(prev => Number((prev - 0.01).toFixed(2)))
+
+  const handleDonate = (address: string, amount: any) => {
+    handlePay(address, amount);
+  }
 
   return (
     <div style={{
@@ -158,7 +163,9 @@ export default function Component() {
         fontWeight: '500',
         cursor: 'pointer',
         marginBottom: '32px'
-      }}>
+      }}
+      onClick={() => handleDonate("", "")}
+>
         Donate
       </button>
 

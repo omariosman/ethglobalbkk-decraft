@@ -185,7 +185,7 @@ export default function StoryPage() {
       }}
       onClick={() => handleDonate(creator, ethAmount)}
       >
-        Donate
+        Donatee
       </button>
 
       <div style={{
