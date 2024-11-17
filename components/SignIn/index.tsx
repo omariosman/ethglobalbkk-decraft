@@ -7,7 +7,7 @@ export const SignIn = () => {
   const router = useRouter(); // Initialize useRouter
 
   const handleExploreClick = () => {
-    router.push('/home');
+    router.push('/home'); // Correct usage of router.push
   };
   
   const { data: session } = useSession();
@@ -70,6 +70,7 @@ export const SignIn = () => {
             }}>Daily Story</span>
           </div>
         </div>
+        <button className="text-white py-5 px-10 bg-black" onClick={() => signOut()}>Sign out</button>
       </>
     );
   } else {
@@ -78,7 +79,7 @@ export const SignIn = () => {
         Not signed in <br />
         <button
           onClick={() => signIn()}
-          className="text-white py-5 px-10 bg-black" // White text, padding of 20px
+          className="text-white py-5 px-10 bg-black m-20" // White text, padding of 20px
         >
           Sign in with World ID
         </button>

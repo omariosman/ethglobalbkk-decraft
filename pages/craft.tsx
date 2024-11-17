@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -7,6 +7,14 @@ export default function Component() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const router = useRouter();
   const { craft } = router.query;
+
+  const [randomIndex, setRandomIndex] = useState(0);
+
+  useEffect(() => {
+    const randomNumber = Math.floor(Math.random() * 2);
+    setRandomIndex(randomNumber);
+  }, []);
+
 
   const selectedCraft = craft ? JSON.parse(craft as any) : null;
 
@@ -154,6 +162,27 @@ export default function Component() {
               <div style={{ fontSize: '16px', fontWeight: '500' }}>{selectedCraft.city || ""}</div>
             </div>
           </div>
+
+          <div style={{
+          backgroundColor: 'white',
+          padding: '16px',
+          borderRadius: '12px',
+          width: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          marginBottom: '24px'
+        }}>
+          <p style={{ fontSize: '16px', margin: 0 }}>
+            Hello Explorer! Today&apos;s Craft is <span style={{ fontWeight: '600' }}>{selectedCraft.name}</span>!
+          </p>
+          <Image
+            src={`/assets/avatars/avatar${randomIndex}.png?height=32&width=32`}
+            alt="Explorer avatar"
+            width={32}
+            height={32}
+          />
+        </div>
 
           <button
             onClick={handleReadStoryClick}
