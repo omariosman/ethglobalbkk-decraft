@@ -1,3 +1,4 @@
+"use server"
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
