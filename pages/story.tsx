@@ -15,8 +15,8 @@ export default function StoryPage() {
   const increment = () => setEthAmount(prev => Number((prev + 0.1).toFixed(2)));
   const decrement = () => setEthAmount(prev => Number((prev - 0.1).toFixed(2)));
 
-  const handleDonate = (address: string, amount: any) => {
-    handlePay(address, amount);
+  const handleDonate = async(address: string, amount: any) => {
+    await handlePay(address, amount);
   }
 
   return (
@@ -183,7 +183,7 @@ export default function StoryPage() {
         cursor: 'pointer',
         marginBottom: '32px'
       }}
-      onClick={() => handleDonate(creator, ethAmount)}
+      onClick={async() => await handleDonate(creator, ethAmount)}
       >
         Donatee
       </button>
